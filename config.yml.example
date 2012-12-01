@@ -1,0 +1,26 @@
+# Clients
+clients:
+  clientone:
+    - Full Name
+    - Address Line 1
+    - Address Line 2
+    - CITY
+
+  clienttwo:
+    - Full Name
+    - Address Line 1
+    - Address Line 2
+    - CITY
+
+# Cosmetic
+logo:
+  path: logo.png
+  width: 250
+
+note: |
+  <i>Multiple lines</i>
+  <b>Of annotated text</b>
+
+footer: |
+  <i>Multiple lines</i>
+  <b>Of annotated text</b>
