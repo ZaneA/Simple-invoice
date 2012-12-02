@@ -133,7 +133,7 @@ class Invoice
       end
 
       if tax != 0.0
-        text "#{config['tax']['name']}: #{sprintf('$%.2f', tax).add_thousands_separator}", size: 13, align: :right
+        text "#{config['tax']['name']}: #{sprintf('$%.2f', total_tax).add_thousands_separator}", size: 13, align: :right
       end
 
       if paid != 0.0

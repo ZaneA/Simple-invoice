@@ -1,0 +1,9 @@
+paid: 200
+
+items:
+  - description: Web design and development.
+    rate: 50
+    units: 10
+  - description: Annual web hosting.
+    rate: 100
+    units: 1
