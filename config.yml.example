@@ -1,3 +1,7 @@
+tax:
+  name: GST
+  percentage: 15
+
 # Clients
 clients:
   clientone:

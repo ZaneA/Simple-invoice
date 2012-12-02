@@ -115,11 +115,15 @@ class Invoice
       total_discount = total * (discount / 100.0)
 
       # Calculate tax
-      tax = config['tax'] || 0.0
+      tax = config['tax']['percentage'] || 0.0
       total_tax = total * (tax / 100.0)
+
+      # Remove any amount paid so far
+      paid = invoice['paid'] || 0.0
 
       net = total
       net = net - total_discount
+      net = net - paid
       net = net + total_tax
 
       text "Total: #{sprintf('$%.2f', total).add_thousands_separator}", size: 13, align: :right
@@ -129,7 +133,11 @@ class Invoice
       end
 
       if tax != 0.0
-        text "GST: #{sprintf('$%.2f', gst).add_thousands_separator}", size: 13, align: :right
+        text "#{config['tax']['name']}: #{sprintf('$%.2f', tax).add_thousands_separator}", size: 13, align: :right
+      end
+
+      if paid != 0.0
+        text "Amount Paid: #{sprintf('$%.2f', paid).add_thousands_separator}", size: 13, align: :right
       end
 
       text "Amount Due: #{sprintf('$%.2f', net).add_thousands_separator}", size: 14, align: :right, style: :bold
