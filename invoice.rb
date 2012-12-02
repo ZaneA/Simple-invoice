@@ -115,12 +115,16 @@ class Invoice
       total_discount = total * (discount / 100.0)
 
       # Calculate tax
-      tax = config['tax']['percentage'] || 0.0
+      tax = 0.0
+      if config['tax'] && config['tax']['percentage']
+        tax = config['tax']['percentage']
+      end
       total_tax = total * (tax / 100.0)
 
       # Remove any amount paid so far
       paid = invoice['paid'] || 0.0
 
+      # Calculate net
       net = total
       net = net - total_discount
       net = net - paid
