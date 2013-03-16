@@ -7,7 +7,7 @@ Usage
 
 It's designed to be simple, I'm using it for my personal invoices. Quickstart:
 
-    $ git clone git://github.com/ZaneA/Simple-invoice
+    $ git clone git://github.com/ZaneA/Simple-invoice.git
     $ cd Simple-invoice
     $ bundle install
     $ ./invoice.rb example/2013-01-01-clientone-some-work.yml
