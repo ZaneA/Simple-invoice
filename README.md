@@ -1,4 +1,6 @@
-This small Ruby program reads simple YAML documents and generates nice looking PDF invoices as output.
+This small Ruby program reads simple YAML documents and generates nice (I think) looking PDF invoices as output.
+
+[Everybody loves screenshots!](https://raw.github.com/ZaneA/Simple-invoice/master/screenshot.png)
 
 Usage
 ---
