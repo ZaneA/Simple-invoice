@@ -22,6 +22,8 @@ logo:
   path: logo.png
   width: 250
 
+line_total: yes
+
 note: |
   <i>Multiple lines</i>
   <b>Of annotated text</b>

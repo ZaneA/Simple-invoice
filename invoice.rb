@@ -83,25 +83,44 @@ class Invoice
 
       total = 0.0
 
-      cells = [[
-        '<b>Item</b>',
+      header = [
+        { content: '<b>Item</b>', align: :left },
         { content: '<b>Rate</b>', align: :right },
         { content: '<b>Units</b>', align: :right }
-      ]]
+      ]
+      
+      if config['line_total']
+        header << { content: '<b>Total</b>', align: :right }
+      end
+      
+      cells = [header]
 
       invoice['items'].each do |item|
-        cells << [
+        line_total = item['rate'] * item['units']
+        total += line_total
+        
+        cell = [
           item['description'],
           { content: sprintf('$%.2f', item['rate']).add_thousands_separator, align: :right },
           { content: item['units'].to_s, align: :right }
         ]
-
-        total += item['rate'] * item['units']
+        
+        if config['line_total']
+          cell << { content: sprintf('$%.2f', line_total), align: :right }
+        end
+        
+        cells << cell
+      end
+      
+      if config['line_total']
+        column_widths = [360, 60, 60, 60]
+      else
+        column_widths = [420, 60, 60]
       end
 
       table cells,
         header: true,
-        column_widths: [420, 60, 60],
+        column_widths: column_widths,
         row_colors: ['fcfcfc', 'eeeeee'],
         cell_style: {
           borders: [:bottom],
