@@ -178,7 +178,7 @@ class Invoice
 
     filename_no_ext = File.basename(basename, File.extname(basename))
 
-    filename_no_ext =~ /(\d+)-(\d+)-(\d+)-(\w+)-([a-z\-]+)/
+    filename_no_ext =~ /(\d+)-(\d+)-(\d+)-(\w+)-([a-zA-Z\-]+)/
 
     {
       filename: filename,
