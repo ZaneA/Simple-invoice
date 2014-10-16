@@ -1,4 +1,5 @@
 # Optional
+currency_symbol: $
 tax:
   name: GST
   percentage: 15

@@ -54,6 +54,9 @@ class Invoice
 
     file_hash = @file_hash
 
+    # Set a currency symbol from config or $ by default
+    currency_symbol = config['currency_symbol'] || '$'
+
     info = {
       Title: "#{file_hash[:title]} Invoice",
       Author: config['name']
@@ -102,12 +105,12 @@ class Invoice
         
         cell = [
           item['description'],
-          { content: sprintf('$%.2f', item['rate']).add_thousands_separator, align: :right },
+          { content: sprintf('%s%.2f', currency_symbol, item['rate']).add_thousands_separator, align: :right },
           { content: item['units'].to_s, align: :right }
         ]
         
         if config['line_total']
-          cell << { content: sprintf('$%.2f', line_total), align: :right }
+          cell << { content: sprintf('%s%.2f', currency_symbol, line_total), align: :right }
         end
         
         cells << cell
@@ -150,21 +153,21 @@ class Invoice
       net = net - paid
       net = net + total_tax
 
-      text "Total: #{sprintf('$%.2f', total).add_thousands_separator}", size: 13, align: :right
+      text "Total: #{sprintf('%s%.2f', currency_symbol, total).add_thousands_separator}", size: 13, align: :right
 
       if discount != 0.0
         text "Discount: #{discount}%", size: 13, align: :right
       end
 
       if tax != 0.0
-        text "#{config['tax']['name']}: #{sprintf('$%.2f', total_tax).add_thousands_separator}", size: 13, align: :right
+        text "#{config['tax']['name']}: #{sprintf('%s%.2f', currency_symbol, total_tax).add_thousands_separator}", size: 13, align: :right
       end
 
       if paid != 0.0
-        text "Amount Paid: #{sprintf('$%.2f', paid).add_thousands_separator}", size: 13, align: :right
+        text "Amount Paid: #{sprintf('%s%.2f', currency_symbol, paid).add_thousands_separator}", size: 13, align: :right
       end
 
-      text "Amount Due: #{sprintf('$%.2f', net).add_thousands_separator}", size: 14, align: :right, style: :bold
+      text "Amount Due: #{sprintf('%s%.2f', currency_symbol, net).add_thousands_separator}", size: 14, align: :right, style: :bold
 
       move_down 2.cm
 
